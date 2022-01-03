@@ -20,21 +20,17 @@ services:
       MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
       MYSQL_HOST: localhost
 
-  ngnix:
+  nginx:
     depends_on:
       - backend
       - frontend
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: "./nginx"
+    build: ./nginx
     ports:
       - "3050:80"
 
   backend:
-    build:
-      dockerfile: Dockerfile
-      context: "./backend"
+    build: ./backend
     depends_on:
       - mysql_db
     volumes:
@@ -48,9 +44,7 @@ services:
     stdin_open: true
     environment:
     - CHOKIDAR_USEPOLLING=true
-    build:
-      dockerfile: Dockerfile
-      context: ./frontend
+    build: ./frontend
     volumes:
       - /app/node_modules
       - ./frontend:/app
@@ -59,7 +53,7 @@ services:
     image: adminer:latest
     restart: unless-stopped
     ports:
-      - 8000:8000
+      - 8000:8080
     depends_on:
       - mysql_db
     environment:
