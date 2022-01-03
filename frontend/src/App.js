@@ -77,7 +77,7 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <h1>SickTechTips!!</h1>
+        <h1>SickTechTips</h1>
         <div className='form'>
           <input name='setPostTitle' placeholder='Enter Post Title' onChange={this.handleChange} />
           <input name='setPostContent' placeholder='Enter Content' onChange={this.handleChange} />
