@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
       this.state = {
         setPostTitle: '',
-        setContent: '',
+        setPostContent: '',
         fetchData: [],
         contentUpdate: ''
       }
@@ -80,7 +80,7 @@ class App extends Component {
         <h1>SickTechTips</h1>
         <div className='form'>
           <input name='setPostTitle' placeholder='Enter Post Title' onChange={this.handleChange} />
-          <input name='setContent' placeholder='Enter Content' onChange={this.handleChange} />
+          <input name='setPostContent' placeholder='Enter Content' onChange={this.handleChange} />
         </div>
         <Button className='my-2' variant="primary" onClick={this.submit}>Submit</Button> <br /><br />
         <Container>

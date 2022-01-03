@@ -29,6 +29,7 @@ app.get('/get', (req, res) => {
 
 app.post("/insert", (req, res) => {
     const postTitle = req.body.setPostTitle;
+    console.log(req);
     const postContent = req.body.setPostContent;
     const InsertQuery = "INSERT INTO posts (post_title, post_content) VALUES (?, ?)";
     db.query(InsertQuery, [postTitle, postContent], (err, result) => {
