@@ -45,7 +45,9 @@ services:
     tty: true
     environment:
     - CHOKIDAR_USEPOLLING=true
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
       - ./frontend:/app
