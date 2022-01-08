@@ -1,5 +1,10 @@
 version: '3.8'
 
+x-common-variables: &common-variables
+  MYSQL_DATABASE: stt_db
+  MYSQL_USER: MYSQL_USER
+  MYSQL_PASSWORD: MYSQL_PASSWORD
+
 services:
   mysql_db:
     image: mysql
@@ -11,9 +16,7 @@ services:
     ports:
       - "9906:3306"
     environment:
-      MYSQL_DATABASE: stt_db
-      MYSQL_USER: MYSQL_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD
+      <<: *common-variables
       MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
       MYSQL_HOST: localhost
 
@@ -22,6 +25,7 @@ services:
       - backend
       - frontend
     restart: always
+    build: ./nginx
     ports:
       - "3050:80"
 
@@ -29,15 +33,24 @@ services:
     build: ./backend
     depends_on:
       - mysql_db
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
     environment:
-      MYSQL_DATABASE: stt_db
-      MYSQL_USER: MYSQL_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD
+      <<: *common-variables
       MYSQL_HOST_IP: mysql_db
 
   frontend:
     stdin_open: true
     tty: true
+    environment:
+    - CHOKIDAR_USEPOLLING=true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
 
   adminer:
     image: adminer:latest

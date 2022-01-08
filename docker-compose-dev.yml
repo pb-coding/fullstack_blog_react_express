@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+      
+  backend:
+    depends_on:
+      - mysql_db
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+
+  frontend:
+    stdin_open: true
+    tty: true
+    environment:
+    - CHOKIDAR_USEPOLLING=true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
