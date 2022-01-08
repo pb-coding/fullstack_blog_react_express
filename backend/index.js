@@ -19,25 +19,25 @@ app.get('/', (req, res) => {
     res.send('Backend is running..')
 });
 
-app.get('/get', (req, res) => {
+app.get('/posts/get', (req, res) => {
     const SelectQuery = " SELECT * FROM posts";
     db.query(SelectQuery, (err, result) => {
-        res.send(result)
+      res.send(result?result:[])
     })
 })
 
 
-app.post("/insert", (req, res) => {
+app.post("/posts/insert", (req, res) => {
     const postTitle = req.body.setPostTitle;
-    console.log(req);
     const postContent = req.body.setPostContent;
     const InsertQuery = "INSERT INTO posts (post_title, post_content) VALUES (?, ?)";
     db.query(InsertQuery, [postTitle, postContent], (err, result) => {
+      console.log(err)
       console.log(result)
     })
 })
 
-app.delete("/delete/:postId", (req, res) => {
+app.delete("/posts/delete/:postId", (req, res) => {
   const postId = req.params.postId;
   const DeleteQuery = "DELETE FROM posts WHERE id = ?";
   db.query(DeleteQuery, postId, (err, result) => {
@@ -45,7 +45,7 @@ app.delete("/delete/:postId", (req, res) => {
   })
 })
 
-app.put("/update/:postId", (req, res) => {
+app.put("/posts/update/:postId", (req, res) => {
   const postContent = req.body.contentUpdate;
   const postId = req.params.postId;
   const UpdateQuery = "UPDATE posts SET post_content = ? WHERE id = ?";

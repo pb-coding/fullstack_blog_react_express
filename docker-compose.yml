@@ -2,14 +2,12 @@ version: '3.8'
 
 services:
   mysql_db:
-    image: mysql
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     restart: always
     cap_add:
       - SYS_NICE
-    volumes:
-      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
-    ports:
-      - "9906:3306"
     environment:
       MYSQL_DATABASE: stt_db
       MYSQL_USER: MYSQL_USER

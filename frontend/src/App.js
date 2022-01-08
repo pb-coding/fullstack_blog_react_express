@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Button, Container, Card, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -29,16 +29,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-  axios.get("/api/get")
+  axios.get("/api/posts/get")
     .then((response) => {
-      this.setState({
+      if (typeof(response.data) == "object") {
+        this.setState({
           fetchData: response.data
       })
+      }
     })
   }
 
   submit = () => {
-    axios.post('/api/insert', this.state)
+    axios.post('/api/posts/insert', this.state)
       .then(() => { alert('success post') })
     console.log(this.state)
     document.location.reload();
@@ -46,38 +48,35 @@ class App extends Component {
 
   delete = (id) => {
     if (window.confirm("Do you want to delete? ")) {
-      axios.delete(`/api/delete/${id}`)
+      axios.delete(`/api/posts/delete/${id}`)
       document.location.reload()
     }
   }
 
   edit = (id) => {
-    axios.put(`/api/update/${id}`, this.state)
+    axios.put(`/api/posts/update/${id}`, this.state)
     document.location.reload();
   }
 
   render() {
-    let card = this.state.fetchData.map((val, key) => {
+    console.log(this.state.fetchData);
+    let post = this.state.fetchData.map((val, key) => {
       return (
         <React.Fragment>
-          <Card style={{ width: '18rem' }} className='m-2'>
-            <Card.Body>
-              <Card.Title>{val.post_title}</Card.Title>
-              <Card.Text>
-                {val.post_content}
-              </Card.Text>
-              <input name='contentUpdate' onChange={this.handleChange2} placeholder='Update Content' ></input>
-              <Button className='m-2' onClick={() => { this.edit(val.id) }}>Update</Button>
-              <Button onClick={() => { this.delete(val.id) }}>Delete</Button>
-            </Card.Body>
-          </Card>
+          <span class="post">
+            <h1>{val.post_title}</h1>
+            <p>{val.post_content}</p>
+            <input name='contentUpdate' onChange={this.handleChange2} placeholder='Update Content' ></input>
+            <Button className='m-2' onClick={() => { this.edit(val.id) }}>Update</Button>
+            <Button onClick={() => { this.delete(val.id) }}>Delete</Button>
+          </span>
         </React.Fragment>
       )
     })
 
     return (
       <div className='App'>
-        <h1>SickTechTips</h1>
+        <h1>SickTechTips!</h1>
         <div className='form'>
           <input name='setPostTitle' placeholder='Enter Post Title' onChange={this.handleChange} />
           <input name='setPostContent' placeholder='Enter Content' onChange={this.handleChange} />
@@ -85,7 +84,7 @@ class App extends Component {
         <Button className='my-2' variant="primary" onClick={this.submit}>Submit</Button> <br /><br />
         <Container>
           <Row>
-            {card}
+            {post}
           </Row>
         </Container>
       </div>
