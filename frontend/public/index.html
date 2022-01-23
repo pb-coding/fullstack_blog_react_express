@@ -16,57 +16,28 @@
 </head>
 
 <body>
-
-<div class="container">
-
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
-    <div class="container-fluid">
-
-        <a class="navbar-brand ms-3" href="%PUBLIC_URL%">
-          <img src="%PUBLIC_URL%/stt-poly.png" width="150px" height="auto" class="d-inline-block align-top" alt="">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a itemprop="url" href="" class="nav-link"><span itemprop="name">IT SysAdmin</span></a></li>
-            <li class="nav-item"><a itemprop="url" href="" class="nav-link"><span itemprop="name">Psychology</span></a></li>
-          </ul>
-        </div>
-
-        <form class="d-flex my-2 searchform" role="search" method="get" id="searchform" action="">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="s" id="s">
-          <button id="searchsubmit" value="Search" class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-
-  </nav>
-
-</div>
-
-
-<div class="container mt-4">
-  <div class="row">
-      <div class="col">
-          
-          <p>Left column</p>
-
-      </div>
-      
-      <div class="col-lg-6">
-        <div id="root"></div>
-      </div>
-      
-      <div class="col">
-          <p>right column</p>
-      </div>
-  </div>
-</div>
-
-
+  <div id="root"></div>
 </body>
+
+
+<footer class="footer py-3 mt-4 shadow">
+  <div class="container">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <li class="nav-item"><a href="/imprint" class="nav-link px-2">Imprint</a></li>
+    <li class="nav-item"><a href="/backend" class="nav-link px-2">Backend</a></li>
+  </ul>
+  <p class="text-center">© 2022 SickTechTips</p>
+  </div>
+</footer>
+
+<script>
+  hljs.highlightAll();
+
+  document.addEventListener("DOMContentLoaded", function(){
+    navbar_height = document.querySelector('.navbar').offsetHeight;
+    document.body.style.paddingTop = navbar_height + 'px';
+  });
+  
+</script>
 
 </html>
