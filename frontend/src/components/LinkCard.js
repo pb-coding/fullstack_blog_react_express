@@ -13,7 +13,7 @@ class LinkCard extends React.Component {
       <div className='jumperEntries'>
         <div className="card shadow">
           <div className="card-body">
-            <h5 class="card-title">Follow me on:</h5>
+            <h5 className="card-title">Follow me on:</h5>
             {jumperEntry}
           </div>
         </div>

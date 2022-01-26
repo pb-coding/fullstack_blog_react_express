@@ -14,7 +14,7 @@ class JumperCard extends DataAndState {
       <div className='jumperEntries'>
         <div className="card shadow">
           <div className="card-body">
-            <h5 class="card-title">Posts:</h5>
+            <h5 className="card-title">Posts:</h5>
             {jumperEntry}
           </div>
         </div>
