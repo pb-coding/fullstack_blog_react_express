@@ -4,7 +4,7 @@ class Test extends Component {
 
   render() {
     return (
-      <p>Space for some tests..</p>
+      <p>Space for some tests...</p>
     )
   }
 

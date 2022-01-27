@@ -33,17 +33,29 @@ app.get('/navigation/get', (req, res) => {
 
 
 app.post("/posts/insert", (req, res) => {
-    db.query("INSERT INTO posts (post_title, post_content) VALUES (?, ?)", [req.body.setPostTitle, req.body.setPostContent], (err, result) => {
+  db.query("INSERT INTO posts (post_title, post_content) VALUES (?, ?)", [req.body.setPostTitle, req.body.setPostContent], (err, result) => {
+    if(err) {
       console.error(err)
+      res.status(500).send({error: 'error'});
+    }
+
+    else {
       res.end()
-    })
-    
+    }
+  })
+  
 })
 
 app.post("/navigation/insert", (req, res) => {
   db.query("INSERT INTO nav (nav_name, link) VALUES (?, ?)", [req.body.setNavName, req.body.setNavLink], (err, result) => {
-    console.error(err)
-    res.end()
+    if(err) {
+      console.error(err)
+      res.status(500).send({error: 'error'});
+    }
+
+    else {
+      res.end()
+    }
   })
   
 })

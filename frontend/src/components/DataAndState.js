@@ -48,7 +48,9 @@ class DataAndState extends React.Component {
     .then(() => {
       document.location.reload()
     })
-    .catch(error => console.error(error))
+    .catch(error => {
+      console.error(error)
+    })
   }
 
   delete(url) {
@@ -57,7 +59,7 @@ class DataAndState extends React.Component {
       .then(() => {
         document.location.reload()
       })
-      .catch(error => console.error(error))
+      .catch(error => alert(error))
     }
   }
 

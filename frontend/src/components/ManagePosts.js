@@ -2,14 +2,15 @@ import React from 'react';
 import DataAndState from './DataAndState';
 
 class ManagePosts extends DataAndState {
-  
+    
   render() {
 
     let editPosts = this.state.posts.map((val, key) => {
       return (
         <React.Fragment key={key}>
-          <div className="post">
+          <div className="post mt-2">
             <h2>{val.post_title}</h2>
+            <p>Posted on:{new Date(Date.parse(val.timestamp)).toLocaleString()}</p>
             <p>{val.post_content}</p>
             <textarea id="tb-update-post-content" className="form-control" name='contentUpdate' onChange={this.stateUIValueChanges} placeholder='Update Content' ></textarea>
             <button className='btn btn-outline-warning btn-small my-2 me-2' onClick={() => { this.edit(`/api/posts/update/${val.id}`) }}>Edit</button>

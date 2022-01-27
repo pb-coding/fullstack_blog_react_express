@@ -18,16 +18,17 @@ class Posts extends DataAndState {
         if (postTitle.includes(query.toLowerCase())) {
           filteredPosts.push(post)
         }
+        return null
       });
 
-      if (filteredPosts.length == 0) {
+      if (filteredPosts.length === 0) {
         filteredPosts.push({ id: "0", post_title: "", post_content: "Nothing matched your search request.."})
       }
 
       return filteredPosts
     };
     
-    if(this.state.posts.length == 0) {
+    if(this.state.posts.length === 0) {
       return (
         <div className="noposts m-3">
           <h1>No Posts in Database</h1>
@@ -51,6 +52,7 @@ class Posts extends DataAndState {
         return (
           <div id={"post-" + val.id} key={key}>
             <h1>{val.post_title}</h1>
+            <p>Posted on: {new Date(Date.parse(val.timestamp)).toLocaleString()}</p>
             <p>{val.post_content}</p>
           </div>
         )
