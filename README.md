@@ -1,4 +1,4 @@
-# Fullstack Blog App with React
+# Fullstack Blog App using MERN-Stack
 
 This is about me learning:
 * building a full stack app using MERN Stack with MySQL (MySQL / ExpressJS / React / Nginx)
