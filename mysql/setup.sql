@@ -3,14 +3,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_title` varchar(200) NOT NULL,
   `post_content` text(10000) NOT NULL,
+  `post_page` varchar(200) NOT NULL DEFAULT 'Home',
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `nav` (
+CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nav_name` varchar(50) NOT NULL,
+  `page_name` varchar(200) NOT NULL,
   `link` varchar(50) NOT NULL,
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `display_in_nav` BIT(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;

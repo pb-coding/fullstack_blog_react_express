@@ -1,15 +1,14 @@
-const express = require('express');
-const mysql = require('mysql2');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import mysql from 'mysql2';
+import db_config from './config/db.js'
 
 const db = mysql.createPool({
-    host: 'mysql_db',
-    user: 'MYSQL_USER',
-    password: 'MYSQL_PASSWORD',
-    database: 'stt_db'
-  })
-
-
+  host: db_config.HOST,
+  user: db_config.USER,
+  password: db_config.PASSWORD,
+  database: db_config.DB
+})
 
 const app = express();
 app.use(express.json())
@@ -25,8 +24,8 @@ app.get('/posts/get', (req, res) => {
     })
 })
 
-app.get('/navigation/get', (req, res) => {
-  db.query(" SELECT * FROM nav", (err, result) => {
+app.get('/pages/get', (req, res) => {
+  db.query(" SELECT * FROM pages", (err, result) => {
     res.send(result?result:[])
   })
 })
@@ -46,8 +45,8 @@ app.post("/posts/insert", (req, res) => {
   
 })
 
-app.post("/navigation/insert", (req, res) => {
-  db.query("INSERT INTO nav (nav_name, link) VALUES (?, ?)", [req.body.setNavName, req.body.setNavLink], (err, result) => {
+app.post("/pages/insert", (req, res) => {
+  db.query("INSERT INTO pages (page_name, link) VALUES (?, ?)", [req.body.setPageName, req.body.setPageLink], (err, result) => {
     if(err) {
       console.error(err)
       res.status(500).send({error: 'error'});
@@ -68,8 +67,8 @@ app.delete("/posts/delete/:postId", (req, res) => {
   
 })
 
-app.delete("/navigation/delete/:navId", (req, res) => {
-  db.query("DELETE FROM nav WHERE id = ?", req.params.navId, (err, result) => {
+app.delete("/pages/delete/:pageId", (req, res) => {
+  db.query("DELETE FROM pages WHERE id = ?", req.params.pageId, (err, result) => {
     if (err) console.error(err);
     res.end()
   })
@@ -84,8 +83,8 @@ app.put("/posts/update/:postId", (req, res) => {
   
 })
 
-app.put("/navigation/update/:navId", (req, res) => {
-  db.query("UPDATE nav SET nav_name = ? WHERE id = ?", [req.body.navNameUpdate, req.params.navId], (err, result) => {
+app.put("/pages/update/:pageId", (req, res) => {
+  db.query("UPDATE pages SET page_name = ? WHERE id = ?", [req.body.pageNameUpdate, req.params.pageId], (err, result) => {
     if (err) console.error(err)
     res.end()
   })

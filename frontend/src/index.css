@@ -36,24 +36,45 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.navbar {
-  background-color: var(--navbar-color);
+.bgcolor-background {
+  background-color: var(--background)
 }
+
+.color-background {
+  color: var(--background)
+}
+
+.bgcolor-fontcolor {
+  background-color: var(--font-color)
+}
+
+.color-fontcolor {
+  color: var(--font-color)
+}
+
+.bgcolor-navbarcolor {
+  background-color: var(--navbar-color)
+}
+
+.color-navbarcolor {
+  color: var(--navbar-color)
+}
+
+.bgcolor-cardcolor {
+  background-color: var(--card-color)
+}
+
+.color-cardcolor {
+  color: var(--card-color)
+}
+
 
 .nav-link {
   color: var(--nav-link-color);
 }
 
-.navbar-brand {
-  color: var(--font-color);
-}
-
 .card {
   background-color: var(--card-color);
-}
-
-.block {
-text-align: justify;
 }
 
 a {
@@ -61,31 +82,9 @@ a {
   text-decoration: none;
 }
 
-.form-control {
-  background-color: var(--font-color);
-}
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+/* page-backend */
 
-.post p {
-  text-align: justify;
-}
-
-.footer {
-  background-color: var(--navbar-color);
-}
-
-#test {
-  width: 100%;
-  background-color: red;
-}
-
-
-/* ManagePosts */
-
-.site-backend textarea {
+.page-backend textarea {
   background-color: var(--card-color);
-}
+} 
