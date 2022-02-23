@@ -18,3 +18,13 @@ In fullstack_blog_react_express folder type:
 * for development: ./dev.sh up -d --build
 * for production: ./prod.sh up -d --build
 * logs: ./dev.sh logs -f
+
+* Open localhost:3050 to see the blog
+
+
+![Blog pic](https://sicktechtips.com/blog1.png)
+
+* Open localhost:3050/backend to add blog entries or pages into the navigation
+
+![Blog pic 2](https://sicktechtips.com/blog2.png)
+![Blog pic 3](https://sicktechtips.com/blog3.png)
