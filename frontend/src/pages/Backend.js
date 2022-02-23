@@ -3,7 +3,7 @@ import LinkCard from '../components/LinkCard';
 import ManagePages from '../components/ManagePages';
 import ManagePosts from '../components/ManagePosts';
 
-function Backend() {
+function Backend(props) {
 
   return (
     <div className="page-backend">
@@ -19,8 +19,8 @@ function Backend() {
           />
           </div>
           <div className="col-lg-6 mt-2">
-            <ManagePages className="comp-manage-pages"/>
-            <ManagePosts className="comp-manage-posts"/>
+            <ManagePages pageData={props.pageData} setChildChange={props.setChildChange} className="comp-manage-pages"/>
+            <ManagePosts postsData={props.postsData} setChildChange={props.setChildChange} className="comp-manage-posts"/>
           </div>
           <div className="col mt-2"> 
             <LinkCard 

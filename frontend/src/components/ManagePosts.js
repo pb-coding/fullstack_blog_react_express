@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { deleteRequest, editRequest, insertRequest, fetchFromAPI } from '../api'
+import { deleteRequest, editRequest, insertRequest } from '../api'
 
 
 function ManagePosts(props) {
-  const [postsData, setPostsData] = useState({ posts: [] });
   const [contentUpdate, setContentUpdate] = useState('');
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
 
-  useEffect(() => {
-
-
-    fetchFromAPI(setPostsData, "/api/posts/get", "posts")
-
-
-  }, []);
-
-
-
-  if (postsData.posts.length === 0) {
+  
+  if (props.postsData.posts.length === 0) {
     var editPosts = <p className="mt-3 fs-6">No Posts in Database..</p>
 
   }
   else {
-    var editPosts = postsData.posts.map((val, key) => {
+    var editPosts = props.postsData.posts.map((val, key) => {
       return (
         <div className="post mt-2" key={key}>
           <h2>{val.post_title}</h2>
@@ -35,13 +25,13 @@ function ManagePosts(props) {
             data.contentUpdate = contentUpdate
             const result = await editRequest(`/api/posts/update/${val.id}`, data)
             if (result.status != 200) alert("Edit request failed.")
-            else if (result != null) fetchFromAPI(setPostsData, "/api/posts/get", "posts")
+            else if (result != null) props.setChildChange(Math.floor(Math.random() * 1000000)) /*temporary solution*/
             setContentUpdate('')
           }}>Edit</button>
           <button className='btn btn-outline-danger btn-small my-2 me-2' onClick={async () => { 
             const result = await deleteRequest(`/api/posts/delete/${val.id}`)
             if (result.status != 200) alert("Delete request failed.")
-            else if (result != null) fetchFromAPI(setPostsData, "/api/posts/get", "posts")
+            else if (result != null) props.setChildChange(Math.floor(Math.random() * 1000000)) /*temporary solution*/
           }}>Delete</button>
         </div>
       )
@@ -63,7 +53,7 @@ function ManagePosts(props) {
           data.setPostContent = postContent
           const result = await insertRequest('/api/posts/insert', data)
           if (result.status != 200) alert("Insert request failed.")
-          else if (result != null) fetchFromAPI(setPostsData, "/api/posts/get", "posts")
+          else if (result != null) props.setChildChange(Math.floor(Math.random() * 1000000)) /*temporary solution*/
           setPostTitle('')
           setPostContent('')
         }}>Add</button>
